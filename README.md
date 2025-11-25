@@ -2,7 +2,7 @@
 
 Production-ready monitoring solution for PostgreSQL using Prometheus, Grafana, and Loki.
 
-## 🏗️ Architecture
+## Architecture
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
 │ PostgreSQL  │────▶│   Postgres   │────▶│ Prometheus  │
@@ -20,24 +20,24 @@ Production-ready monitoring solution for PostgreSQL using Prometheus, Grafana, a
 └─────────────┘     └──────────────┘     └─────────────┘
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Docker & Docker Compose installed
 - PostgreSQL instance running
 - Monitoring user created in PostgreSQL
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
+git clone <repo-url>
 cd monitoring-stack
 ```
 
 ### 2. Configure environment
 ```bash
 cp .env.example .env
-# Edit .env with your PostgreSQL credentials
+# Edit .env with your PostgreSQL/Grafana credentials
 nano .env
 ```
 
@@ -51,7 +51,7 @@ docker-compose up -d
 - Prometheus: http://localhost:9090
 - Loki: http://localhost:3100
 
-## 📊 Metrics Collected
+##  Metrics Collected
 
 ### PostgreSQL Metrics
 - Connection count & limits
@@ -67,14 +67,14 @@ docker-compose up -d
 - Disk I/O
 - Network traffic
 
-## 📝 Logs Collected
+##  Logs Collected
 
 - PostgreSQL error logs
 - Slow query logs
 - Connection logs
 - Checkpoint logs
 
-## 🔧 Configuration
+##  Configuration
 
 ### Adding new PostgreSQL instances
 
@@ -85,25 +85,3 @@ scrape_configs:
     static_configs:
       - targets: ['postgres_exporter:9187']
 ```
-
-## 📚 Documentation
-
-- [Prometheus Configuration](prometheus/README.md)
-- [Grafana Dashboards](grafana/README.md)
-- [Alert Rules](prometheus/alerts/README.md)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📄 License
-
-MIT License
-
-## 👤 Author
-
-Your Name - DBA transitioning to DevOps

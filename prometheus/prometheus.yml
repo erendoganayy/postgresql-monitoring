@@ -1,0 +1,72 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'pg-test-cluster'
+    environment: 'test'
+
+# Alertmanager configuration (opsiyonel)
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets: []
+
+# Alert kuralları (opsiyonel)
+# rule_files:
+#   - "alerts/*.yml"
+
+scrape_configs:
+  # Prometheus'un kendisi
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # PostgreSQL Node 1
+  - job_name: 'postgresql-node1'
+    static_configs:
+      - targets: ['10.0.32.155:9187']
+        labels:
+          instance: 'pg-test-pgsql01'
+          role: 'postgres'
+          cluster: 'patroni-cluster'
+
+  # PostgreSQL Node 2
+  - job_name: 'postgresql-node2'
+    static_configs:
+      - targets: ['10.0.32.156:9187']
+        labels:
+          instance: 'pg-test-pgsql02'
+          role: 'postgres'
+          cluster: 'patroni-cluster'
+
+  # Patroni endpoint'leri (REST API - port 8008 varsayılan)
+  - job_name: 'patroni-node1'
+    static_configs:
+      - targets: ['10.0.32.155:8008']
+        labels:
+          instance: 'pg-test-pgsql01'
+          role: 'patroni'
+
+  - job_name: 'patroni-node2'
+    static_configs:
+      - targets: ['10.0.32.156:8008']
+        labels:
+          instance: 'pg-test-pgsql02'
+          role: 'patroni'
+  - job_name: 'node-exporter-node1'
+    static_configs:
+      - targets: ['10.0.32.155:9100']
+        labels:
+          instance: 'pg-test-pgsql01'
+          role: 'node'
+          cluster: 'patroni-cluster'
+
+  # Node Exporter - OS Metrikleri Node 2
+  - job_name: 'node-exporter-node2'
+    static_configs:
+      - targets: ['10.0.32.156:9100']
+        labels:
+          instance: 'pg-test-pgsql02'
+          role: 'node'
+          cluster: 'patroni-cluster'
+

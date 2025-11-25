@@ -1,0 +1,34 @@
+# Sensitive data
+.env
+*.env
+secrets/
+*.key
+*.pem
+
+# Grafana data
+grafana/data/
+grafana.db
+
+# Prometheus data
+prometheus/data/
+
+# Loki data
+loki/data/
+
+# Logs
+*.log
+logs/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker volumes
+volumes/
